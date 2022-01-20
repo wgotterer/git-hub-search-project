@@ -1,8 +1,10 @@
 import React, {useState, useEffect} from 'react'
+import UserPopUp from './UserPopUp'
 
  function UserCards({avatar, username}) {
 
     const [userInfo, setUserInfo] = useState()
+    const [popUp, setPopUP] = useState(false)
 
 
     useEffect(() => {
@@ -17,16 +19,20 @@ import React, {useState, useEffect} from 'react'
     }
     }, [username])
    
-       
-        console.log(userInfo)
+    
+    function handleClickPopUpUser(){
+        setPopUP(true)
+    }
   
 
 
     return userInfo ? (
         <div>
             <h2>{username}</h2>
-            <img height="100" width="100" src={avatar} />
+            <img  height="100" width="100" src={avatar} />
             <h3>Public Repos: {userInfo.public_repos}</h3>
+            {popUp ? <UserPopUp /> : 
+            <button onClick={handleClickPopUpUser}>More Info</button>}
         </div>
     ) : null
 }
