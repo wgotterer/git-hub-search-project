@@ -4,25 +4,36 @@ import RepoCard from './RepoCard'
 function UserPopUp({avatar, username, followers, joinDate, following, bio, email, location}) {
     
     const [repos, setRepos] = useState()
-    const [repoForm, setRepoForm] = useState()
+    const [repoForm, setRepoForm] = useState("")
     const [filteredRepos, setFilteredRepos] = useState(repos)
 
     useEffect(() => {
         fetch(`https://api.github.com/users/${username}/repos`)
         .then(r => r.json())
-        .then((repoList) => setRepos(repoList))
+        .then((repoList) => {
+            setRepos(repoList)
+            setFilteredRepos(repoList)
+
+        })
         
     }, [])
 
     function handleRepoInput(e){
         setRepoForm(e.target.value)
+        handleDesplayFilteredRepos()
     }
     
     function handleDesplayFilteredRepos(){
-        repos.filter((oneRepo)=> {
-            
-        })
+        if(repoForm !== ""){
+           return setFilteredRepos( repos.filter((singleRepo)=> {
+                return singleRepo.name.includes(repoForm)
+            }))
+        }else{
+            return setFilteredRepos(repos)
+        }
+        
     }
+    console.log(repoForm)
 
     return (
         <div>
@@ -44,7 +55,7 @@ function UserPopUp({avatar, username, followers, joinDate, following, bio, email
                 />
             </form>
             <img  height="100" width="100" src={avatar} />
-            {repos ? repos.map((oneRepo) => <RepoCard oneRepo={oneRepo} /> ) : null}
+            {repos && filteredRepos ? filteredRepos.map((oneRepo) => <RepoCard oneRepo={oneRepo} /> ) : null}
         </div>
     )
 }
