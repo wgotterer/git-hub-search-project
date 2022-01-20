@@ -28,11 +28,25 @@ import UserPopUp from './UserPopUp'
 
     return userInfo ? (
         <div>
-            <h2>{username}</h2>
+            
+            {popUp ? 
+            <div className="pop-up-container">
+            <UserPopUp 
+            avatar={avatar}
+             username={username} 
+             followers={userInfo.followers}
+             following={userInfo.following}
+             bio={userInfo.bio}
+             email={userInfo.email}
+             location={userInfo.location}
+             joinDate={userInfo.created_at}
+              /> 
+              </div> : 
+              
+            <button onClick={handleClickPopUpUser}>More Info</button>}
+             <h2>{username}</h2>
             <img  height="100" width="100" src={avatar} />
             <h3>Public Repos: {userInfo.public_repos}</h3>
-            {popUp ? <UserPopUp /> : 
-            <button onClick={handleClickPopUpUser}>More Info</button>}
         </div>
     ) : null
 }
