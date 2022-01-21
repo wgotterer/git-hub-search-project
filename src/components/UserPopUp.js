@@ -38,7 +38,7 @@ function UserPopUp({avatar, username, followers, joinDate, following, bio, email
     return (
         <div>
             Pop Up
-            <h2>{username}</h2>
+             <h2>{username} Profile</h2>
             <h3>Followers: {followers}</h3>
             <h3>Following: {following}</h3>
             <h3>Bio:</h3>
@@ -54,7 +54,7 @@ function UserPopUp({avatar, username, followers, joinDate, following, bio, email
                 onChange={handleRepoInput}
                 />
             </form>
-            <img  height="100" width="100" src={avatar} />
+            
             {repos && filteredRepos ? filteredRepos.map((oneRepo) => <RepoCard oneRepo={oneRepo} /> ) : null}
         </div>
     )

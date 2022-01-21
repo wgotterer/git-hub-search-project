@@ -1,6 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import UserPopUp from './UserPopUp'
 
+
+
+
  function UserCards({avatar, username}) {
 
     const [userInfo, setUserInfo] = useState()
@@ -27,10 +30,11 @@ import UserPopUp from './UserPopUp'
 
 
     return userInfo ? (
-        <div>
-            
+        <div className="flex-user-container">
             {popUp ? 
-            <div className="pop-up-container">
+            
+            <div >
+            <img  height="100" width="100" src={avatar} />
             <UserPopUp 
             avatar={avatar}
              username={username} 
@@ -41,13 +45,15 @@ import UserPopUp from './UserPopUp'
              location={userInfo.location}
              joinDate={userInfo.created_at}
               /> 
-              </div> : 
+              </div>: 
               
-            <button onClick={handleClickPopUpUser}>More Info</button>}
+              <button onClick={handleClickPopUpUser}>More Info</button>}
              <h2>{username}</h2>
-            <img  height="100" width="100" src={avatar} />
+            
             <h3>Public Repos: {userInfo.public_repos}</h3>
-        </div>
+            
+            </div> 
+            
     ) : null
 }
 
